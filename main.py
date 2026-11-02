@@ -1,6 +1,7 @@
 # main.py
 # Compare merge sort, quicksort, hybrid sort, and Python's built-in sort
 # on large random arrays of integers
+# Modified by: Harris Adam
 
 from recursive_sorts import merge_sort, quicksort, hybrid_sort
 from random import randint
@@ -81,7 +82,7 @@ def main():
     print("Sort Times (ns):")
     print("Items\tMerge Sort\tQuick Sort\tHybrid Sort\tPython Sort")
     for i in range(len(experiment_sizes)):
-        print(f"{experiment_sizes[i]}\t{sort_times[i][0]:.2f}\t{sort_times[i][1]:.2f}\t{sort_times[i][2]:.2f}")
+        print(f"{experiment_sizes[i]}\t{sort_times[i][0]:.2f}\t{sort_times[i][1]:.2f}\t{sort_times[i][2]:.2f}\t{sort_times[i][3]:.2f}")
     draw_sort_speed_charts(sort_times, experiment_sizes)
 
 if __name__ == '__main__':

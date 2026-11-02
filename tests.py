@@ -1,6 +1,8 @@
+# tests.py
+# Modified by: Harris Adam
 import unittest
 from random import randint
-from recursive_sorts import insertion_sort, merge_sort, quicksort, hybrid_sort
+from recursive_sorts import insertion_sort, merge_sort, quicksort, quicksort_in_place, hybrid_sort
 from time import perf_counter_ns
 
 class TestRecursiveSorts(unittest.TestCase):
@@ -79,6 +81,28 @@ class TestRecursiveSorts(unittest.TestCase):
         self.assertLess(quicksort_time, 10_000_000_000)
         # quicksort should generally be faster than merge sort for large random arrays
         self.assertLess(quicksort_time, merge_time)
+
+    def test_edge_cases_all_sorts(self):
+        # empty, single item, duplicates, already sorted, reversed
+        cases = [[], [1], [5, 5, 5, 5], [1, 2, 3, 4, 5], [5, 4, 3, 2, 1],
+                 [3, 1, 2, 3, 1, 2]]
+        for sort in (merge_sort, quicksort, hybrid_sort):
+            for case in cases:
+                lst = case.copy()
+                sort(lst)
+                self.assertEqual(lst, sorted(case))
+
+    def test_hybrid_sort_thresholds(self):
+        for threshold in (1, 5, 10, 2000):
+            lst = [randint(0, 10000) for _ in range(1000)]
+            sorted_lst = sorted(lst)
+            hybrid_sort(lst, threshold)
+            self.assertEqual(lst, sorted_lst)
+
+    def test_quicksort_in_place_range(self):
+        lst = [5, 3, 8, 6, 2]
+        quicksort_in_place(lst, 1, 3)
+        self.assertEqual(lst, [5, 3, 6, 8, 2])
 
 if __name__ == '__main__':
     unittest.main()
