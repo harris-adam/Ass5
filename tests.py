@@ -5,6 +5,8 @@ from random import randint
 from recursive_sorts import insertion_sort, merge_sort, quicksort, quicksort_in_place, hybrid_sort
 from time import perf_counter_ns
 
+
+
 class TestRecursiveSorts(unittest.TestCase):
     def test_merge_sort_simple(self):
         lst = [64, 34, 25, 12, 22, 11, 90]
